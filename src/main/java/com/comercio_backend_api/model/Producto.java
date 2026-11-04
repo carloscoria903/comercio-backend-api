@@ -15,7 +15,7 @@ public class Producto {
     private Long id;
 
     @Column(unique = true, nullable = false, length = 100)
-    private String codigo;
+    private String codigoBarra;
 
     private boolean activo = true;
 
@@ -32,20 +32,24 @@ public class Producto {
 
     private int stock;
 
+    @Column(nullable = false)
+    private boolean estado = true;
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    public Producto(Long id, String codigo, boolean activo, String nombre, String marca, String descripcion,
-                    BigDecimal precio, int stock, Categoria categoria) {
+    public Producto(Long id, String codigoBarra, boolean activo, String nombre, String marca, String descripcion,
+                    BigDecimal precio, int stock, boolean estado, Categoria categoria) {
         this.id = id;
-        this.codigo = codigo;
+        this.codigoBarra = codigoBarra;
         this.activo = activo;
         this.nombre = nombre;
         this.marca = marca;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
+        this.estado = estado;
         this.categoria = categoria;
     }
 

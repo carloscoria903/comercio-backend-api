@@ -38,7 +38,7 @@ public class Venta {
     private BigDecimal total;
 
     // Relación OneToMany: Una venta contiene múltiples renglones/detalles
-    @OneToMany(mappedBy = "ventas", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleVenta> detalles = new ArrayList<>();
 
 

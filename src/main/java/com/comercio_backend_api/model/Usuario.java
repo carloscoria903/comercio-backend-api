@@ -35,12 +35,13 @@ public class Usuario {
     private LocalDate fechaVencimientoLicencia;
     private boolean licenciaActiva = true;
 
+
     @OneToOne
-    @JoinColumn(name = "persona_id")
-    private Persona propietario;
+    @JoinColumn(name = "empleado_id", nullable = false, unique = true)
+    private Empleado empleado;
 
     public Usuario(Long id, String usuario, String clave, boolean activo, Rol rol, TipoNegocio tipoNegocio,
-                   LocalDate fechaVencimientoLicencia, boolean licenciaActiva, Persona propietario) {
+                   LocalDate fechaVencimientoLicencia, boolean licenciaActiva, Empleado empleado) {
         this.id = id;
         this.usuario = usuario;
         this.clave = clave;
@@ -49,7 +50,7 @@ public class Usuario {
         this.tipoNegocio = tipoNegocio;
         this.fechaVencimientoLicencia = fechaVencimientoLicencia;
         this.licenciaActiva = licenciaActiva;
-        this.propietario = propietario;
+        this.empleado = empleado;
     }
 
     public Usuario() {

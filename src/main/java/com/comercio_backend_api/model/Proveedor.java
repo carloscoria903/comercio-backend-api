@@ -13,9 +13,12 @@ import java.time.LocalDate;
 @Table(name = "proveedores")
 public class Proveedor extends Persona{
 
-    public Proveedor(Long id, String dni, String nombre, String apellido, String telefono, LocalDate
-            fechaNacimiento, String localidad, Provincia provincia, Sexo sexo) {
-        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo);
+    private String cuit;
+
+    public Proveedor(Long id, String dni, String nombre, String apellido, String telefono, LocalDate fechaNacimiento, String localidad,
+                     Provincia provincia, Sexo sexo, boolean estado, String cuit) {
+        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo, estado);
+        this.cuit = cuit;
     }
 
     public Proveedor() {

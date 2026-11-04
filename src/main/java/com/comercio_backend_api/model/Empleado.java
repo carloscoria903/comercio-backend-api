@@ -23,9 +23,9 @@ public class Empleado extends Persona{
     private LocalDate fechaEgreso;
 
     public Empleado(Long id, String dni, String nombre, String apellido, String telefono, LocalDate fechaNacimiento,
-                    String localidad, Provincia provincia, Sexo sexo, int legajo,
+                    String localidad, Provincia provincia, Sexo sexo, boolean estado, int legajo,
                     BigDecimal sueldo, LocalDate fechaIngreso, LocalDate fechaEgreso) {
-        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo);
+        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo, estado);
         this.legajo = legajo;
         this.sueldo = sueldo;
         this.fechaIngreso = fechaIngreso;

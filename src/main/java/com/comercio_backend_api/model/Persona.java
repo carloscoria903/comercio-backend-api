@@ -32,10 +32,12 @@ public abstract class Persona {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
+    @Column(nullable = false)
+    private boolean estado = true;
 
     public Persona(Long id, String dni, String nombre, String apellido,
                    String telefono, LocalDate fechaNacimiento, String localidad,
-                   Provincia provincia, Sexo sexo)
+                   Provincia provincia, Sexo sexo, boolean estado)
     {
         this.id = id;
         this.dni = dni;
@@ -46,6 +48,7 @@ public abstract class Persona {
         this.localidad = localidad;
         this.provincia = provincia;
         this.sexo = sexo;
+        this.estado = estado;
     }
 
     public Persona() {

@@ -16,9 +16,16 @@ public class Categoria {
     @Column(nullable = false, unique = true, length = 100)
     private String nombre;
 
-    public Categoria(Long id, String nombre) {
+    private String descripcion;
+
+    @Column(nullable = false)
+    private boolean estado = true;
+
+    public Categoria(Long id, String nombre, String descripcion, boolean estado) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.estado = estado;
     }
 
     public Categoria() {

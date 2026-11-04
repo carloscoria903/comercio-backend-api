@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class Cliente extends Persona{
 
     public Cliente(Long id, String dni, String nombre, String apellido, String telefono, LocalDate fechaNacimiento,
-                   String localidad, Provincia provincia, Sexo sexo) {
-        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo);
+                   String localidad, Provincia provincia, Sexo sexo, boolean estado) {
+        super(id, dni, nombre, apellido, telefono, fechaNacimiento, localidad, provincia, sexo, estado);
     }
 
     public Cliente() {
