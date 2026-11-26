@@ -7,6 +7,7 @@ import com.comercio_backend_api.model.Usuario;
 import com.comercio_backend_api.repository.EmpleadoRepository;
 import com.comercio_backend_api.repository.UsuarioRepository;
 import com.comercio_backend_api.service.UsuarioService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final EmpleadoRepository empleadoRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // Inyección de dependencias por constructor
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, EmpleadoRepository empleadoRepository) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository,
+                              EmpleadoRepository empleadoRepository,
+                              PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.empleadoRepository = empleadoRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setUsuario(dto.getUsuario());
-        nuevoUsuario.setClave(dto.getClave()); // Más adelante aquí aplicaremos encriptación BCrypt
+        nuevoUsuario.setClave(passwordEncoder.encode(dto.getClave()));
         nuevoUsuario.setActivo(true);
         nuevoUsuario.setRol(dto.getRol());
         nuevoUsuario.setTipoNegocio(dto.getTipoNegocio());
@@ -72,7 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         usuarioExistente.setUsuario(dto.getUsuario());
         if (dto.getClave() != null && !dto.getClave().isBlank()) {
-            usuarioExistente.setClave(dto.getClave());
+            usuarioExistente.setClave(passwordEncoder.encode(dto.getClave()));
         }
         usuarioExistente.setRol(dto.getRol());
         usuarioExistente.setTipoNegocio(dto.getTipoNegocio());

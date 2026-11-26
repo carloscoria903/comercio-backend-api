@@ -7,6 +7,9 @@ import com.comercio_backend_api.model.Producto;
 import com.comercio_backend_api.repository.CategoriaRepository;
 import com.comercio_backend_api.repository.ProductoRepository;
 import com.comercio_backend_api.service.ProductoService;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -113,6 +116,15 @@ public class ProductoServiceImpl implements ProductoService {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
 
+        // Verificar si quien hace la petición es un EMPLEADO
+        if (esEmpleadoLogueado()) {
+            if (dto.getNombre() != null || dto.getCodigoBarra() != null
+                    || dto.getDescripcion() != null || dto.getMarca() != null
+                    || dto.getCategoriaId() != null) {
+                throw new AccessDeniedException("El empleado solo tiene permiso para modificar el precio del producto.");
+            }
+        }
+
         // 1. Si mandaron un nuevo código de barras
         if (dto.getCodigoBarra() != null && !dto.getCodigoBarra().isBlank()) {
             if (!producto.getCodigoBarra().equals(dto.getCodigoBarra())
@@ -165,7 +177,6 @@ public class ProductoServiceImpl implements ProductoService {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
 
-        // Si estaba en -3 y entran 12, queda en 9 automáticamente
         producto.setStock(producto.getStock() + cantidadIngresada);
 
         Producto actualizado = productoRepository.save(producto);
@@ -178,6 +189,13 @@ public class ProductoServiceImpl implements ProductoService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
         producto.setEstado(false);
         productoRepository.save(producto);
+    }
+
+    private boolean esEmpleadoLogueado() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) return false;
+        return auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_EMPLEADO"));
     }
 
     private ProductoResponseDTO mapearAResponseDTO(Producto p) {
