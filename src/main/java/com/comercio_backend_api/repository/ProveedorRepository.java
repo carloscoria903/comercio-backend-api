@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
     boolean existsByCuit(String cuit);
+    boolean existsByDni(String dni);
     Optional<Proveedor> findByCuit(String cuit);
     List<Proveedor> findByEstadoTrue();
 

@@ -2,7 +2,7 @@ package com.comercio_backend_api.model.enums;
 
 public enum Rol {
     ADMIN_SUPER,
-    CLIENTE_DUEÑO,
+    CLIENTE_DUENIO,
     EMPLEADO
 
     // admin: control total del sistema

@@ -17,8 +17,6 @@ public class Producto {
     @Column(unique = true, nullable = false, length = 100)
     private String codigoBarra;
 
-    private boolean activo = true;
-
     @Column(nullable = false, length = 150)
     private String nombre;
 
@@ -39,11 +37,10 @@ public class Producto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    public Producto(Long id, String codigoBarra, boolean activo, String nombre, String marca, String descripcion,
+    public Producto(Long id, String codigoBarra, String nombre, String marca, String descripcion,
                     BigDecimal precio, int stock, boolean estado, Categoria categoria) {
         this.id = id;
         this.codigoBarra = codigoBarra;
-        this.activo = activo;
         this.nombre = nombre;
         this.marca = marca;
         this.descripcion = descripcion;

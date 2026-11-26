@@ -11,6 +11,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     boolean existsByCodigoBarra(String codigoBarra);
     Optional<Producto> findByCodigoBarra(String codigoBarra);
     List<Producto> findByEstadoTrue();
+    List<Producto> findByNombreContainingIgnoreCaseAndEstadoTrue(String nombre);
     List<Producto> findByCategoriaIdAndEstadoTrue(Long categoriaId);
     List<Producto> findByStockLessThanEqualAndEstadoTrue(Integer stockMinimo);
 }

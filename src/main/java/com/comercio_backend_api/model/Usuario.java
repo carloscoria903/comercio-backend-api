@@ -37,7 +37,7 @@ public class Usuario {
 
 
     @OneToOne
-    @JoinColumn(name = "empleado_id", nullable = false, unique = true)
+    @JoinColumn(name = "empleado_id", nullable = true, unique = true)
     private Empleado empleado;
 
     public Usuario(Long id, String usuario, String clave, boolean activo, Rol rol, TipoNegocio tipoNegocio,
